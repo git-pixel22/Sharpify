@@ -10,34 +10,35 @@
 <body class="bg-gradient-to-r from-zinc-800 to-zinc-900">
   
     <!-- here will come the name of the tool -->
-    <div class="flex justify-center items-center space-x-4 m-4 text-8xl mt-[100px] mb-[40px]">
+    <div class="flex justify-center items-center space-x-4 m-4 text-8xl mt-[100px] mb-[60px]">
         <b class="text-white bg-clip-text bg-gradient-to-br from-gray-200 to-white">Sharpify</b>
     </div>
     
 
-      <!-- here are buttons (Input, Submit) -->
-    <div class="flex justify-center items-center space-x-4 m-4 mb-[40px]">
+    <!-- here are buttons (Input, Submit) -->
+    <div class="flex justify-center items-center space-x-4 m-4 mb-[60px]">
 
-    <form action="/" method="post" enctype="multipart/form-data">
-        <label for="imageInput" class="text-black bg-amber-50 hover:bg-amber-100 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-amber-50 dark:hover:bg-amber-100 dark:focus:ring-amber-200 cursor-pointer">
+    <form action="/" method="post" enctype="multipart/form-data" class="flex items-center">
+        <label for="imageInput" class="text-white font-bold bg-purple-600 hover:bg-purple-700 rounded-full text-lg px-5 py-2.5 text-center mr-2 cursor-pointer">
             <span id="file-name" class="file-name">Choose A File</span>
         </label>
         <input type="file" id="imageInput" name="imageInput" accept="image/jpeg, image/png, image/webp" style="display: none;" />
             
-        <button type="submit" class="text-black bg-amber-50 hover:bg-amber-100 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-amber-50 dark:hover:bg-amber-100 dark:focus:ring-amber-200">
+        <button type="submit" class="text-white font-bold bg-purple-600 hover:bg-purple-700 rounded-full text-lg px-5 py-2.5 text-center ml-2">
             Submit File
         </button>
-    </form>
+    </form> 
 
     </div>
   
     <!-- Example Images will come here -->
     <div class="flex justify-center items-center space-x-16 m-4">
-      <img height="150px" width="150px" src="/static/input.jpg" alt="">
+      <img height="200px" width="200px" src="/static/input.jpg" alt="">
       <img height="150px" width="150px" src="/static/arrow.png" alt="">
-      <img height="150px" width="150px" src="/static/output.jpg" alt="">
+      <img height="200px" width="200px" src="/static/output.jpg" alt="">
     </div>
 
+    <!-- script to get filename when a file is selected -->
     <script>
     document.getElementById('imageInput').addEventListener('change', function(e) {
     var fileName = e.target.files[0].name;
