@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="../static/output.css">
+    <title>Sharpify</title>
 </head>
-<body>
-    Hello, Pixel Sir.
-</body>
+<body class="bg-gradient-to-r from-zinc-800 to-zinc-900">
+  
+    <!-- here will come the name of the tool -->
+    <div class="flex justify-center items-center space-x-4 m-4 text-8xl mt-[100px] mb-[40px]">
+        <b class="text-white bg-clip-text bg-gradient-to-br from-gray-200 to-white">Sharpify</b>
+    </div>
+    
+
+      <!-- here are buttons (Input, Submit) -->
+    <div class="flex justify-center items-center space-x-4 m-4 mb-[40px]">
+
+    <form action="/" method="post" enctype="multipart/form-data">
+        <label for="imageInput" class="text-black bg-amber-50 hover:bg-amber-100 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-amber-50 dark:hover:bg-amber-100 dark:focus:ring-amber-200 cursor-pointer">
+            <span id="file-name" class="file-name">Choose A File</span>
+        </label>
+        <input type="file" id="imageInput" name="imageInput" accept="image/jpeg, image/png, image/webp" style="display: none;" />
+            
+        <button type="submit" class="text-black bg-amber-50 hover:bg-amber-100 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-amber-50 dark:hover:bg-amber-100 dark:focus:ring-amber-200">
+            Submit File
+        </button>
+    </form>
+
+    </div>
+  
+    <!-- Example Images will come here -->
+    <div class="flex justify-center items-center space-x-16 m-4">
+      <img height="150px" width="150px" src="/static/input.jpg" alt="">
+      <img height="150px" width="150px" src="/static/arrow.png" alt="">
+      <img height="150px" width="150px" src="/static/output.jpg" alt="">
+    </div>
+
+    <script>
+    document.getElementById('imageInput').addEventListener('change', function(e) {
+    var fileName = e.target.files[0].name;
+    document.getElementById('file-name').textContent = fileName ? fileName : "No file chosen";
+    });
+    </script>
+  </body>
+
 </html>

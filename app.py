@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-# from backend.main import process_audio
 
 app = Flask(__name__)
 
@@ -9,29 +8,23 @@ def index():
     if request.method == "GET":
         return render_template("index.html")
     
-    # elif request.method == "POST":
+    elif request.method == "POST":
 
-        # if 'inputAudio' not in request.files:
-        #     return 'No file part'
+        if 'imageInput' not in request.files:
+            return 'No file part'
 
-        # file = request.files['inputAudio']
+        file = request.files['imageInput']
 
-        # if file.filename == '':
-        #     return 'No selected file'
+        if file.filename == '':
+            return 'No selected file'
 
-        # file.save('input.wav')
+        file.save(file.filename)
 
-        # process_audio()
+        # run the executable
 
-        # audio_names = [
-        #     "Deep",
-        #     "High",
-        #     "Ghost",
-        #     "Robotic",
-        #     "Echo",
-        #     "Radio",
-        #     "Vader"
-        # ]
+        # save the output image in /static
+
+        # dislay the output image in output.html using jinja syntax
 
         # # Generating audio file paths with dynamic names
         # audio_files = [
@@ -42,6 +35,8 @@ def index():
         # enumerated_audio = list(zip(audio_names, audio_files))
 
         # return render_template("output.html", enumerated_audio=enumerated_audio)
+
+    return render_template("output.html")
 
 if __name__ == "__main__":
     app.run(debug=False, host='0.0.0.0')
