@@ -21,6 +21,15 @@
       <img height="200px" width="200px" src="{{ url_for('static', filename=output_image) }}" alt="Your Result Will Be Displayed Here">
     </div>
 
+    <!-- Download Button -->
+    <div class="flex justify-center items-center space-x-16 m-4">
+      <button type="submit" class="text-white font-bold bg-purple-600 hover:bg-purple-700 rounded-full text-lg px-5 py-2.5 text-center ml-2">
+        <a href="{{ url_for('static', filename=output_image) }}" download="UpscaleBySharpify.png">
+          Download
+        </a>
+    </button>
+    </div>
+
   </body>
 
 </html>

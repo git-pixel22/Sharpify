@@ -23,6 +23,11 @@ def index():
         # DELETE THIS FILE AFTER USE
         file.save(file.filename)
 
+        #if ouptut.png image exists under static folder, delete it.
+        output_file_path = os.path.join('static', 'output.png')
+        if os.path.exists(output_file_path):
+            os.remove(output_file_path)
+
         # run the executable (currently the output file is saved inside backend folder)
         command = f"backend/realesrgan-ncnn-vulkan -i {file.filename} -o static/output.png -n realesrgan-x4plus"
         subprocess.run(command, shell=True)
