@@ -3,6 +3,16 @@
 - This website upscales images and videos using [Real-ESRGAN](https://github.com/xinntao/Real-ESRGAN).
 - Currently, there is no functionality on the site for video upscaling, I'll be adding it in the future.
 
+&nbsp;
+
+# This How It Looks &nbsp; ; )
+
+
+
+https://github.com/git-pixel22/Sharpify/assets/84857474/55f20ce0-05b4-467a-baa6-6dcae623b5c3
+
+
+
 # Steps To Run The Application Locally
 
 1. Clone the repository.
