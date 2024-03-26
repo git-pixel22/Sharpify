@@ -6,49 +6,80 @@
     <link rel="stylesheet" href="../static/styles.css">
     <link rel="stylesheet" href="../static/output.css">
     <title>Sharpify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes loadingTextAnimation {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        @keyframes sharpifyAnimation {
+            0% { filter: blur(10px); }
+            100% { filter: blur(0); }
+        }
+
+        .sharpify-text {
+            animation: sharpifyAnimation 2s ease-in-out forwards;
+        }
+    </style>
 </head>
 <body class="bg-gradient-to-r from-zinc-800 to-zinc-900">
-
     <!-- Tool name -->
-    <div class="flex justify-center items-center space-x-4 mx-4 mt-24 mb-14 text-5xl sm:mt-[100px] sm:mb-[60px] sm:text-8xl">
-        <b class="text-white bg-clip-text bg-gradient-to-br from-gray-200 to-white">Sharpify</b>
+    <div class="flex justify-center items-center space-x-4 mx-4 mt-24 mb-8 text-5xl sm:mt-[100px] sm:mb-[40px] sm:text-8xl">
+        <b class="text-white bg-clip-text bg-gradient-to-br from-gray-200 to-white sharpify-text">Sharpify</b>
     </div>
-    
-
+    <p class="text-center text-gray-300 mb-14 text-lg sm:text-xl">Elevate Your Visuals, Enhance Every Detail.</p>
     <form action="/" method="post" enctype="multipart/form-data">
         <!-- Buttons (Input, Submit) -->
-        <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 mx-4 mb-14">
-        
-            <label for="imageInput" class="text-white font-bold bg-purple-600 hover:bg-purple-700 rounded-full text-lg px-5 py-2.5 text-center cursor-pointer">
+        <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 mx-4 mb-14 relative">
+            <label for="imageInput" class="text-white font-bold bg-purple-600 hover:bg-purple-700 rounded-full text-lg px-5 py-2.5 text-center cursor-pointer" id="file-label">
                 <span id="file-name" class="file-name">Choose A File</span>
             </label>
             <input type="file" id="imageInput" name="imageInput" accept="image/jpeg, image/png, image/webp" class="hidden" />
-                
-            <button type="submit" class="text-white font-bold bg-purple-600 hover:bg-purple-700 rounded-full text-lg px-5 py-2.5 text-center">
+            <button type="submit" class="text-white font-bold bg-purple-600 hover:bg-purple-700 rounded-full text-lg px-5 py-2.5 text-center" id="submit-button">
                 Submit File
             </button>
-
+            <!-- Loading element -->
+            <div id="loading" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden flex flex-col items-center">
+                <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-600"></div>
+                <p id="loading-text" class="text-gray-300 mt-4 hidden animate-pulse">Please, be patient. This might take a while depending on input size.</p>
+            </div>
         </div>
-    </form> 
-  
+    </form>
     <div class="flex flex-col sm:flex-row justify-center items-center mx-auto">
         <div class="flex flex-col items-center mb-4">
-          <img class="m-2 sm:m-4 h-32 w-32 sm:h-48 sm:w-48" src="/static/exampleInput.jpg" alt="">
+            <img class="m-2 sm:m-4 h-32 w-32 sm:h-48 sm:w-48" src="/static/exampleInput.jpg" alt="">
         </div>
         <div class="flex flex-col items-center mb-4">
-          <img class="m-2 sm:m-4 h-24 w-24 sm:h-36 sm:w-36 rotate-90 sm:rotate-0" src="/static/arrow.png" alt="">
+            <img class="m-2 sm:m-4 h-24 w-24 sm:h-36 sm:w-36 rotate-90 sm:rotate-0" src="/static/arrow.png" alt="">
         </div>
         <div class="flex flex-col items-center mb-4">
-          <img class="m-2 sm:m-4 h-32 w-32 sm:h-48 sm:w-48" src="/static/exampleOutput.jpg" alt="">
+            <img class="m-2 sm:m-4 h-32 w-32 sm:h-48 sm:w-48" src="/static/exampleOutput.jpg" alt="">
         </div>
-      </div>
-
-    <!-- Script for file name -->
+    </div>
+    <!-- Script for file name and loading element -->
     <script>
-    document.getElementById('imageInput').addEventListener('change', function(e) {
-        var fileName = e.target.files[0].name;
-        document.getElementById('file-name').textContent = fileName ? fileName : "No file chosen";
-    });
+        document.getElementById('imageInput').addEventListener('change', function(e) {
+            var fileName = e.target.files[0].name;
+            document.getElementById('file-name').textContent = fileName ? fileName : "No file chosen";
+        });
+
+        const form = document.querySelector('form');
+        const loading = document.getElementById('loading');
+        const fileLabel = document.getElementById('file-label');
+        const submitButton = document.getElementById('submit-button');
+        const loadingText = document.getElementById('loading-text');
+
+        form.addEventListener('submit', function() {
+            loading.classList.remove('hidden');
+            fileLabel.classList.add('hidden');
+            submitButton.classList.add('hidden');
+
+            setTimeout(function() {
+                loadingText.classList.remove('hidden');
+            }, 5000);
+        });
     </script>
 </body>
 </html>
