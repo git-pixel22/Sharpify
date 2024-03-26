@@ -8,43 +8,47 @@
     <title>Sharpify</title>
 </head>
 <body class="bg-gradient-to-r from-zinc-800 to-zinc-900">
-  
-    <!-- here will come the name of the tool -->
-    <div class="flex justify-center items-center space-x-4 m-4 text-8xl mt-[100px] mb-[60px]">
+
+    <!-- Tool name -->
+    <div class="flex justify-center items-center space-x-4 mx-4 mt-24 mb-14 text-5xl sm:mt-[100px] sm:mb-[60px] sm:text-8xl">
         <b class="text-white bg-clip-text bg-gradient-to-br from-gray-200 to-white">Sharpify</b>
     </div>
     
 
-    <!-- here are buttons (Input, Submit) -->
-    <div class="flex justify-center items-center space-x-4 m-4 mb-[60px]">
+    <form action="/" method="post" enctype="multipart/form-data">
+        <!-- Buttons (Input, Submit) -->
+        <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 mx-4 mb-14">
+        
+            <label for="imageInput" class="text-white font-bold bg-purple-600 hover:bg-purple-700 rounded-full text-lg px-5 py-2.5 text-center cursor-pointer">
+                <span id="file-name" class="file-name">Choose A File</span>
+            </label>
+            <input type="file" id="imageInput" name="imageInput" accept="image/jpeg, image/png, image/webp" class="hidden" />
+                
+            <button type="submit" class="text-white font-bold bg-purple-600 hover:bg-purple-700 rounded-full text-lg px-5 py-2.5 text-center">
+                Submit File
+            </button>
 
-    <form action="/" method="post" enctype="multipart/form-data" class="flex items-center">
-        <label for="imageInput" class="text-white font-bold bg-purple-600 hover:bg-purple-700 rounded-full text-lg px-5 py-2.5 text-center mr-2 cursor-pointer">
-            <span id="file-name" class="file-name">Choose A File</span>
-        </label>
-        <input type="file" id="imageInput" name="imageInput" accept="image/jpeg, image/png, image/webp" style="display: none;" />
-            
-        <button type="submit" class="text-white font-bold bg-purple-600 hover:bg-purple-700 rounded-full text-lg px-5 py-2.5 text-center ml-2">
-            Submit File
-        </button>
+        </div>
     </form> 
-
-    </div>
   
-    <!-- Example Images will come here -->
-    <div class="flex justify-center items-center space-x-16 m-4">
-      <img height="200px" width="200px" src="/static/exampleInput.jpg" alt="">
-      <img height="150px" width="150px" src="/static/arrow.png" alt="">
-      <img height="200px" width="200px" src="/static/exampleOutput.jpg" alt="">
-    </div>
+    <div class="flex flex-col sm:flex-row justify-center items-center mx-auto">
+        <div class="flex flex-col items-center mb-4">
+          <img class="m-2 sm:m-4 h-32 w-32 sm:h-48 sm:w-48" src="/static/exampleInput.jpg" alt="">
+        </div>
+        <div class="flex flex-col items-center mb-4">
+          <img class="m-2 sm:m-4 h-24 w-24 sm:h-36 sm:w-36 rotate-90 sm:rotate-0" src="/static/arrow.png" alt="">
+        </div>
+        <div class="flex flex-col items-center mb-4">
+          <img class="m-2 sm:m-4 h-32 w-32 sm:h-48 sm:w-48" src="/static/exampleOutput.jpg" alt="">
+        </div>
+      </div>
 
-    <!-- script to get filename when a file is selected -->
+    <!-- Script for file name -->
     <script>
     document.getElementById('imageInput').addEventListener('change', function(e) {
-    var fileName = e.target.files[0].name;
-    document.getElementById('file-name').textContent = fileName ? fileName : "No file chosen";
+        var fileName = e.target.files[0].name;
+        document.getElementById('file-name').textContent = fileName ? fileName : "No file chosen";
     });
     </script>
-  </body>
-
+</body>
 </html>
