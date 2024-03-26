@@ -7,20 +7,20 @@
     <link rel="stylesheet" href="../static/output.css">
     <title>Sharpify</title>
 </head>
-<style>
-    body {
-        background-color: black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        text-align: center;
-        color: lime;
-        text-shadow: 0 0 5px lime, 0 0 10px lime, 0 0 20px lime, 0 0 40px lime, 0 0 80px lime, 0 0 160px lime;
-    }
-</style>
-<body>
-    This is the output page, Pixel Sir.
-</body>
+<body class="bg-gradient-to-r from-zinc-800 to-zinc-900">
+  
+    <!-- here will come the name of the tool -->
+    <div class="flex justify-center items-center space-x-4 m-4 text-8xl mt-[100px] mb-[60px]">
+        <b class="text-white bg-clip-text bg-gradient-to-br from-gray-200 to-white">Sharpify</b>
+    </div>
+    
+    </div>
+  
+    <!-- Output Image will come here -->
+    <div class="flex justify-center items-center space-x-16 m-4">
+      <img height="200px" width="200px" src="{{ url_for('static', filename=output_image) }}" alt="Your Result Will Be Displayed Here">
+    </div>
+
+  </body>
+
 </html>

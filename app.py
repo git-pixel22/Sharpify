@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request
+import subprocess
+import os
 
 app = Flask(__name__)
 
@@ -18,25 +20,21 @@ def index():
         if file.filename == '':
             return 'No selected file'
 
+        # DELETE THIS FILE AFTER USE
         file.save(file.filename)
 
-        # run the executable
+        # run the executable (currently the output file is saved inside backend folder)
+        command = f"backend/realesrgan-ncnn-vulkan -i {file.filename} -o static/output.png -n realesrgan-x4plus"
+        subprocess.run(command, shell=True)
 
-        # save the output image in /static
+        #DELETE INPUT
+        os.remove(file.filename)
+
+        # Pass the filename dynamically to the template
+        output_image_path = "output.png"
 
         # dislay the output image in output.html using jinja syntax
-
-        # # Generating audio file paths with dynamic names
-        # audio_files = [
-        #     f"./static/output_{name.lower()}.wav" for name in audio_names
-        # ]
-
-        # # Enumerating the audio files and names as a list of tuples
-        # enumerated_audio = list(zip(audio_names, audio_files))
-
-        # return render_template("output.html", enumerated_audio=enumerated_audio)
-
-    return render_template("output.html")
+        return render_template("output.html", output_image=output_image_path)
 
 if __name__ == "__main__":
     app.run(debug=False, host='0.0.0.0')
