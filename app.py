@@ -1,12 +1,15 @@
 from flask import Flask, render_template, request
 import subprocess
 import os
+from queue import Queue
 
 app = Flask(__name__)
+requests = 0
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-
+    global requests
+    
     if request.method == "GET":
         return render_template("index.html")
     
@@ -19,26 +22,30 @@ def index():
 
         if file.filename == '':
             return 'No selected file'
+        
+        requests = requests + 1
 
-        # DELETE THIS FILE AFTER USE
         file.save(file.filename)
 
-        #if ouptut.png image exists under static folder, delete it.
+        # Deletes older output image
         output_file_path = os.path.join('static', 'output.png')
         if os.path.exists(output_file_path):
             os.remove(output_file_path)
 
-        # run the executable (currently the output file is saved inside backend folder)
-        command = f"backend/realesrgan-ncnn-vulkan -i {file.filename} -o static/output.png -n realesrgan-x4plus"
-        subprocess.run(command, shell=True)
+        while True:    
+            if requests == 1:
+                command = f"backend/realesrgan-ncnn-vulkan -i {file.filename} -o static/output.png -n realesrgan-x4plus"
+                subprocess.run(command, shell=True)
+                requests = requests - 1
+                break
 
-        #DELETE INPUT
+        # DELETE INPUT
         os.remove(file.filename)
 
         # Pass the filename dynamically to the template
         output_image_path = "output.png"
 
-        # dislay the output image in output.html using jinja syntax
+        # Display the output image in output.html using Jinja syntax
         return render_template("output.html", output_image=output_image_path)
 
 if __name__ == "__main__":
