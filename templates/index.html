@@ -44,7 +44,13 @@
             <!-- Loading element -->
             <div id="loading" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden flex flex-col items-center">
                 <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-600"></div>
-                <p id="loading-text" class="text-gray-300 mt-4 hidden animate-pulse">Please, be patient. This might take a while depending on input size.</p>
+                <p id="loading-text" class="text-gray-300 mt-4 hidden animate-pulse">
+
+                    Please, be patient. Contact <a href="https://twitter.com/x_pixel22" target="_blank"><b class="text-lime-400"><u>@x_pixel22</u></b></a> if it takes more than 2 minutes.
+
+                    <span id="countdown" class="text-lime-400 ml-2"></span>
+
+                </p>
             </div>
         </div>
     </form>
@@ -71,6 +77,7 @@
         const fileLabel = document.getElementById('file-label');
         const submitButton = document.getElementById('submit-button');
         const loadingText = document.getElementById('loading-text');
+        const countdown = document.getElementById('countdown');
 
         form.addEventListener('submit', function() {
             loading.classList.remove('hidden');
@@ -80,7 +87,25 @@
             setTimeout(function() {
                 loadingText.classList.remove('hidden');
             }, 5000);
+
+            let timeLeft = 120; // Two minutes in seconds
+
+            const countdownInterval = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+                countdown.textContent = `${minutes}:${seconds}`;
+
+                if (timeLeft === 0) {
+                    clearInterval(countdownInterval);
+                    countdown.textContent = '00:00';
+                } else {
+                    timeLeft--;
+                }
+            }, 1000);
+
         });
+
     </script>
 </body>
 </html>
